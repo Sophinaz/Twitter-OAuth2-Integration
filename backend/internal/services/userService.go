@@ -14,11 +14,11 @@ type userResponse struct {
 }
 
 type UserService struct {
-    twitterRepository repositories.UserRepository
+    userRepository repositories.UserRepository
 }
 
-func NewUserService(twitterRepository repositories.UserRepository) *UserService {
-    return &UserService{twitterRepository: twitterRepository}
+func NewUserService(userRepository repositories.UserRepository) *UserService {
+    return &UserService{userRepository: userRepository}
 }
 // func (s *TwitterService) fetchUserProfile(accessToken string) (*models.TwitterUser, error) {
 //     req, _ := http.NewRequest("GET", "https://api.x.com/2/users/me", nil)
@@ -42,6 +42,10 @@ func NewUserService(twitterRepository repositories.UserRepository) *UserService 
 //     return &result.Data, nil
 // }
 
-func (s *UserService) GetUserProfile(userID uint) (*models.TwitterUser, error) {
-    return s.twitterRepository.GetUserProfile(userID)
+func (s *UserService) GetUserProfile(userID string) (*models.TwitterUser, error) {
+    user, err := s.userRepository.GetUserProfile(userID)
+    if err != nil {
+        return nil, err
+    }
+    return user, nil
 }

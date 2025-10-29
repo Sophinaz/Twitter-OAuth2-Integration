@@ -10,33 +10,33 @@ import (
 )
 
 type TwitterHandler struct {
-	twitterService services.TwitterService
+	twitterService *services.TwitterService
 }
 
-func NewTwitterHandler(twitterService services.TwitterService) *TwitterHandler {
+func NewTwitterHandler(twitterService *services.TwitterService) *TwitterHandler {
 	return &TwitterHandler{twitterService: twitterService}
 }
 
 func (h *TwitterHandler) Callback(c *gin.Context) {
-    var request dtos.TwitterCallbackRequest
-    if err := c.ShouldBindJSON(&request); err != nil {
-        c.JSON(http.StatusBadRequest, errors.BadRequest("invalid request", err))
-        return
-    }
+	var request dtos.TwitterCallbackRequest
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, errors.BadRequest("invalid request", err))
+		return
+	}
 
-    code := request.Code
-    codeVerifier := request.CodeVerifier
+	code := request.Code
+	codeVerifier := request.CodeVerifier
 
-    if code == "" {
-        c.JSON(http.StatusBadRequest, errors.BadRequest("missing code", nil))
-        return
-    }
+	if code == "" {
+		c.JSON(http.StatusBadRequest, errors.BadRequest("missing code", nil))
+		return
+	}
 
-    err := h.twitterService.Callback(code, codeVerifier)
-    if err != nil {
-        c.JSON(http.StatusInternalServerError, errors.InternalError("failed to callback", err))
-        return
-    }
+	userID, err := h.twitterService.Callback(code, codeVerifier)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, errors.InternalError("failed to callback", err))
+		return
+	}
 
-    c.JSON(http.StatusOK, gin.H{"message": "success"})
+	c.JSON(http.StatusOK, gin.H{"message": "success", "user_id": userID})
 }

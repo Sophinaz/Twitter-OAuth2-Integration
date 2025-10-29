@@ -1,8 +1,16 @@
 services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      # Mounts the frontend folder to the nginx web root
+      - ./frontend:/usr/share/nginx/html
+
   backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./backend/Dockerfile
     container_name: ccdevtech_backend
     ports:
       - "8080:8080"
@@ -41,7 +49,7 @@ services:
     image: migrate/migrate
     container_name: ccdevtech_migrate
     volumes:
-      - ./migrations:/migrations
+      - ./backend/migrations:/migrations
     command: ["-path=/migrations", "-database=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?sslmode=disable", "up"]
     env_file:
       - .env
@@ -49,4 +57,5 @@ services:
       postgres:
         condition: service_healthy
 
-    
+volumes:
+  postgres_data:

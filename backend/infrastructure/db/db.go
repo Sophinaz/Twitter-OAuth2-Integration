@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 	"log"
-	config "github.com/Sophinaz/chapa-digital-wallet-system-assignment/internal/configs"
+	config "github.com/Sophinaz/Twitter-OAuth2-Integration/internal/configs"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

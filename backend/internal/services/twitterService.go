@@ -15,22 +15,22 @@ import (
 )
 
 type TwitterService struct {
-	twitterRepository repositories.TwitterRepositoryImpl
+	twitterRepository repositories.TwitterRepository
 }
 
-func NewTwitterService(twitterRepository repositories.TwitterRepositoryImpl) *TwitterService {
+func NewTwitterService(twitterRepository repositories.TwitterRepository) *TwitterService {
 	return &TwitterService{twitterRepository: twitterRepository}
 }
 
-func (s *TwitterService) Callback(code string, codeVerifier string) error {
+func (s *TwitterService) Callback(code string, codeVerifier string) (string, error) {
 	token, err := s.exchangeCodeForToken(code, codeVerifier)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	userData, err := s.fetchUserProfile(token.AccessToken)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// Convert OAuthToken to TwitterUserToken
@@ -47,7 +47,11 @@ func (s *TwitterService) Callback(code string, codeVerifier string) error {
 		UpdatedAt:    time.Now(),
 	}
 
-	return s.twitterRepository.SaveTwitterUser(twitterUser)
+    err = s.twitterRepository.SaveTwitterUser(twitterUser)
+    if err != nil {
+        return "", err
+    }
+	return twitterUser.TwitterID, nil
 }
 
 func (s *TwitterService) exchangeCodeForToken(code string, codeVerifier string) (*models.OAuthToken, error) {
@@ -77,6 +81,7 @@ func (s *TwitterService) exchangeCodeForToken(code string, codeVerifier string) 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
+        fmt.Println("error exchanging code for token", err)
 		return nil, err
 	}
 	defer resp.Body.Close()
