@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter OAuth2 Integration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h2>TwitterConnect</h2>
+                </div>
+                <div class="nav-actions">
+                    <button id="connectTwitterBtn" class="connect-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                        Connect Twitter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="hero">
+                <h1>Connect Your Twitter Account</h1>
+                <p>Securely authenticate with Twitter using OAuth2 and manage your social media data.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Secure Authentication</h3>
+                        <p>OAuth2 protocol ensures your credentials are never stored on our servers.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📊</div>
+                        <h3>Data Insights</h3>
+                        <p>Access your Twitter profile information and public tweets safely.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💾</div>
+                        <h3>Data Storage</h3>
+                        <p>Your authenticated data is securely stored in our database.</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <button id="connectTwitterBtnMain" class="connect-btn-main">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                        Get Started with Twitter
+                    </button>
+                </div>
+            </div>
+
+            <!-- User Info Section (hidden by default) -->
+            <div id="userInfo" class="user-info" style="display: none;">
+                <h2>Welcome!</h2>
+                <div id="userDetails" class="user-details">
+                    <!-- User information will be populated here -->
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <p>Connecting to Twitter...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TwitterConnect</h4>
+                    <p>A secure OAuth2 integration demo for Twitter authentication.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>OAuth2 Authentication</li>
+                        <li>Data Retrieval</li>
+                        <li>Secure Storage</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Security</h4>
+                    <ul>
+                        <li>No Password Storage</li>
+                        <li>Token-based Auth</li>
+                        <li>Encrypted Data</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TwitterConnect Demo. Built for OAuth2 testing purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

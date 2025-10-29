@@ -1,0 +1,39 @@
+# Dependencies
+vendor/
+go.sum
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Database
+postgres_data/
+
+# Test coverage
+coverage/
+*.out
+
+# Go specific
+*.test
+*.prof
+

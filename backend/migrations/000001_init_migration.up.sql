@@ -1,0 +1,13 @@
+CREATE TABLE twitter_users (
+    id SERIAL PRIMARY KEY,
+    twitter_id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    access_token VARCHAR(255) NOT NULL,
+    refresh_token VARCHAR(255) NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    token_type VARCHAR(255) NOT NULL,
+    scope VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
